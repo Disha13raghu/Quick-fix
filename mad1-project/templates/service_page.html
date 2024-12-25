@@ -1,0 +1,297 @@
+{% extends "./layouts/mainframe.html" %}
+
+{% block title%}
+
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='style/signup.css') }}">
+{% endblock %}
+
+{% block body %}
+<div>
+{% include "./basic_components/navigation.html" %}
+</div>
+
+
+<!-- this is the service title-->
+
+<div class="container4">
+    <h1>
+    &nbsp; SERVICES
+    </h1>
+</div>
+
+
+<!--this is all service details and added name-->
+
+<div class="container2">
+
+    <!--this is the container to hold cards-->
+
+      <div class="container3">
+        <div class="row">
+
+
+              <div class="col-5">
+    
+                <a class="btn btn-light" data-bs-toggle="collapse" href="#multiCollapse{{service.service_id}}" role="button" aria-expanded="true" aria-controls="multiCollapse{{service.service_id}}"> <img src="/static/service_images/{{service.service_id}}.jpg" class="card-img-top" alt="{{service.service_name}} service" style="border: none ; outline: none; width: 400px; height: 200px; object-fit: cover;"></a>
+                            <div class="collapse multi-collapse" id="multiCollapse{{service.service_id}}">
+
+                               <div class="card card-body">
+                                <b>  Price: {{service.price}}</b>
+                                <h6> Time Required: {{service.time_required}} days</h6>
+                                <h6> {{service.service_description}}</h6>
+                                <h6> Ratings:{{service.service_rating}}</h6>
+                                <h6> Professional_assigned:{{total_professional}}</h6>
+                                
+
+                              </div>
+
+                            </div>
+
+
+                            <div class="card-body">
+                                <h5 class="card-title">{{service.service_name}} </h5>
+                              
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#static1Backdrop">
+                                  Update
+                                </button>
+
+                                <div class="modal fade" id="static1Backdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                  <div class="modal-dialog">
+                                    <div class="modal-content">
+
+                                        <div class="modal-header">
+                                          <h5 class="modal-title" id="staticBackdropLabel">UPDATE SERVICE</h5>
+                                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+
+
+                                      <div class="modal-body">
+
+                                          <form class="row g-3" method="POST" action="/update_service{{service.service_id}}" enctype="multipart/form-data" >
+                                            <div class="col-md-6">
+                                              <label for="name" class="form-label">Service Name</label>
+                                              <input type="text" name="service_name"class="form-control" id="name" value={{service.service_name}} required>
+                                            </div>
+                                            <div class="col-md-6">
+                                              <label for="price" class="form-label">Price</label>
+                                              <input type="number" name="price"class="form-control" id="price" value={{service.price}} required>
+                                            </div>
+                                            <div class="col-12">
+                                              <label for="description" class="form-label">Description</label>
+                                              <input type="text" name="service_description" class="form-control" id="description" value={{service.service_description}} required>
+                                            </div>
+                                            <div class="col-12">
+                            
+                                              <label for="time_required" class="form-label">Time required</label>
+                                              <input type="number" name="time_required" class="form-control" id="time_required" value={{service.time_required}} required>
+                                            </div>
+                                            <div class="mb-3">
+                                              <label for="formFile" class="form-label">service image File</label>
+                                              <input class="form-control" type="file" id="formFile" name="file" >
+                                            </div>
+                                            
+                                            <div class="modal-footer">
+                                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                              <button type="submit" class="btn btn-primary" >Update</button>
+                                            </div>
+                                          </form>
+
+                                      </div>
+
+                                    </div>
+                                  </div>
+                                </div>
+
+
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#static3Backdrop">
+                                        Delete
+                                </button>
+
+                                <div class="modal fade" id="static3Backdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                      <div class="modal-dialog">
+                                        <div class="modal-content">
+
+                                            <div class="modal-header">
+                                              <h5 class="modal-title" id="staticBackdropLabel">DELETE SERVICE</h5>
+                                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+
+
+                                            <div class="modal-body">
+                                        
+                                                <div class="modal-footer">
+                                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                  <button type="submit" class="btn btn-danger" ><a href="/delete_service/{{service.service_id}}">DELETE</a></button>
+                                                </div>
+                                            </div>
+                                                            
+                                        </div>                  
+                                      </div>
+
+                                </div>
+                            </div>
+                                
+              
+              </div>
+
+              <div class="col-7">
+                   
+                  <div class="row">
+                        <div class="col-6">
+                            <img src="/static/charts_service/rating_pie/{{service.service_id}}pie.jpg" alt="Ratings pie Chart" style="width: 400px; height: 350px; left:1000px;">
+                    
+                        </div>
+                        
+                        <div class="col-5">
+          
+                            <img src="/static/charts_service/service_bargraph/{{service.service_id}}bar.jpg" alt="Service Bar graph" style="width: 350px; height: 300px;"><br>
+                            <b> Total Requests= {{total_request}}</b>
+              
+                        </div>
+                      
+      
+                  </div>
+                   
+              </div>  
+
+
+        </div>
+      </div>
+
+</div>      
+
+
+   
+    
+
+
+    
+   
+
+<!--______________________________________________________________________________________________________________________________________________________________________________________________________-->
+
+
+
+<!-- this is the requests for service-->
+
+<div class="container6">
+    <h1>
+      &nbsp; SERVICE REQUESTS
+   </h1>
+</div>
+
+ <!-- this is all request from serices-->
+
+ <div class="container5">
+    
+    
+  <div class="container3">
+  
+  
+    
+      <div class="d-flex flex-nowrap overflow-auto">
+
+          {% for r in requests %}
+             
+              <div class="card me-3" style="width: 21.7rem;height: 21.5rem;">
+  
+                  <a class="btn btn-light" data-bs-toggle="collapse" href="#multiCollapse{{r.request_id}}" role="button" aria-expanded="true" aria-controls="multiCollapse{{r.request_id}}"> <img src="/static/service_images/{{r.service_id}}.jpg" class="card-img-top" alt="{{r.service_name}} service" style="border: none ; outline: none; width: 100%; height: 200px; object-fit: cover;"></a>
+                      
+                      <div class="collapse multi-collapse" id="multiCollapse{{r.request_id}}">
+
+                          <div class="card card-body">
+                              <b>Customer Name:<a href="/user_page/{{r.user_id}}"> {{r.name_user}}</a></b>
+                              <h6>User_name {{r.user_name}}</h6>
+                              <b>Professional Id: <a href="/user_page/{{r.professional_id}}">{{r.professional_id}}</a></b>
+                              <h6>Date of request: {{r.date_of_request}} day
+                              <h6>Date of completion: {{r.date_of_completion}}</h6>
+                              <h6>Address: {{r.address}}</h6>
+                              <h6>Remarks: {{r.remarks}}</h6>
+                              <h6>Ratings:{{r.ratings}}</h6>
+                          </div>
+
+                      </div>
+  
+  
+                  <div class="card-body">
+
+                      <h5 class="card-title">{{r.request_id}}.{{r.service_name}} -  {{r.service_status}}</h5>
+                     
+  
+                  </div>       &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+
+              </div>
+              
+         
+          {% endfor %}
+  
+
+        
+      </div>
+  
+
+  </div>
+
+</div>
+
+
+ ________________________________________________________________________________________________________________________________________________________________________________________________-->
+
+
+<!-- this is the  requests  title -->
+
+<div class="container8">
+    <h1>
+      &nbsp; PROFESSIONALS ASSIGNED
+   </h1>
+</div>
+
+
+
+<div class="container7">
+
+    <div class="container3">
+
+
+        <div class="d-flex flex-nowrap overflow-auto">
+
+          
+            {% for p in professional %}
+          
+                  <div class="card me-3" style="width: 21.7rem; height: 20rem">
+
+                      <div class="card-body">
+
+                            <h4 class="card-title"><a href="/user_page/{{p.user_id}}">{{p.name_user}}</a></h4>
+                        
+                            <h5 class="card-subtitle mb-2 text-muted"><a href="../static/files/{{p.user_id}}.pdf" class="card-link">Identity file of {{p.user_id}}</a></h5> <br> <br>                    
+                            <h6 class="card-text">User_name: &nbsp;&nbsp; {{p.user_name}}
+                                  <br>
+                                  <h6>Address: {{p.address}}</h6>
+                                  <h6> Pincode: {{p.pincode}}</h6>
+                                  <h6>service: {{p.service_id}}</h6>
+                            </h6>
+                    
+          
+                      
+                    </div>
+                  
+                </div>           
+          
+            {% endfor %}
+        
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+{% endblock %}

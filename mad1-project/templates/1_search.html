@@ -1,0 +1,338 @@
+{% extends "./layouts/mainframe.html" %}
+
+{% block title%}
+      {{curr_user.user_id}}Page
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='style/signup.css') }}">
+{% endblock %}
+
+{% block body %}
+
+<div>
+    {% include "./basic_components/navigation.html" %}
+</div>
+
+<nav class="navbar navbar-light bg-light" style="top: 80px; position: absolute">
+    <div class="container-fluid">
+      <form class="d-flex" method="POST" action="/search"  >
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search_key">
+        <button class="btn btn-outline-success" type="submit">Search</button> 
+        
+
+      </form>&nbsp;&nbsp;
+          {% if search_key %}  search results for &nbsp;<b>{{search_key}}&nbsp;</b>?
+          {% endif %}
+    </div>
+  </nav>
+
+
+  <div class="container4">
+              <h1>
+                &nbsp; SERVICES 
+              </h1>  
+                 
+              
+            
+              
+</div>
+
+<div style="position: absolute; top: 150px;left: 1200px; "> 
+  <div class="btn-group dropend">
+    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+      Order By
+    </button>
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item" href="/search?search_key={{search_key}}&ordered=rating">Ratings</a></li>
+      <li><a class="dropdown-item" href="/search?search_key={{search_key}}&ordered=price">Price</a></li>
+      <li><a class="dropdown-item" href="/search?search_key={{search_key}}&ordered=newest">Newest first</a></li>
+    </ul>
+  </div>
+</div>
+
+
+ <!-- this is all request -->
+
+ <div class="container2">
+
+    <!--this is the container to hold cards-->
+
+    <div class="container3">
+
+        <div class="d-flex flex-nowrap overflow-auto">
+
+
+              {% for s in service %}
+
+
+                  <div class="card me-3" style="width: 21.7rem;">
+
+                      <a class="btn btn-light" data-bs-toggle="collapse" href="#multiCollapse{{s.service_id}}" role="button" aria-expanded="true" aria-controls="multiCollapse{{s.service_is}}"> <img src="/static/service_images/{{s.service_id}}.jpg" class="card-img-top" alt="{{s.name}} service" style="border: none ; outline: none; width: 100%; height: 200px; object-fit: cover;"></a>
+                  
+                      <div class="collapse multi-collapse" id="multiCollapse{{s.service_id}}">
+
+                        <div class="card card-body">
+                          <b>Price:{{s.price}}</b>
+                          <h6>Time Required: {{s.time_required}} day</h6>
+                          <h6> {{s.service_description}}</h6>
+                          <h6> Ratings:{{s.service_ratings}}</h6>
+                        </div>
+
+                      </div>
+
+
+                      <div class="card-body">
+                          <h5 class="card-title"><a href="/service_page/{{s.service_id}}">{{s.service_name}}</a></h5>
+                        
+                          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#static1Backdrop">
+                            Update
+                          </button>
+
+                          <div class="modal fade" id="static1Backdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="staticBackdropLabel">UPDATE SERVICE</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+
+
+                                <div class="modal-body">
+
+                                  <form class="row g-3" method="POST" action="/update_service/{{s.service_id}}" enctype="multipart/form-data" >
+                                    <div class="col-md-6">
+                                      <label for="name" class="form-label">Service Name</label>
+                                      <input type="text" name="service_name"class="form-control" id="name" value={{s.service_name}} required>
+                                    </div>
+                                    <div class="col-md-6">
+                                      <label for="price" class="form-label">Price</label>
+                                      <input type="number" name="price"class="form-control" id="price" value={{s.price}} required>
+                                    </div>
+                                    <div class="col-12">
+                                      <label for="description" class="form-label">Description</label>
+                                      <input type="text" name="service_description" class="form-control" id="description" value={{s.service_description}} required>
+                                    </div>
+                                    <div class="col-12">
+                    
+                                      <label for="time_required" class="form-label">Time required</label>
+                                      <input type="number" name="time_required" class="form-control" id="time_required" value={{s.time_required}} required>
+                                    </div>
+                                    <div class="mb-3">
+                                      <label for="formFile" class="form-label">service image File</label>
+                                      <input class="form-control" type="file" id="formFile" name="file"  required>
+                                    </div>
+                                    
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                      <button type="submit" class="btn btn-primary" >Update</button>
+                                    </div>
+                                  </form>
+
+                                </div>
+
+                              </div>
+                            </div>
+                          </div>
+
+
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#static3Backdrop">
+                                  Delete
+                                </button>
+
+                              <div class="modal fade" id="static3Backdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                  <div class="modal-content">
+
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="staticBackdropLabel">DELETE SERVICE</h5>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+
+
+                                    <div class="modal-body">
+                                
+                                        <div class="modal-footer">
+                                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                          <button type="submit" class="btn btn-danger" ><a href="/delete_service/{{s.service_id}}">DELETE</a></button>
+                                        </div>
+                                    </div>
+                                                      
+                                  </div>                  
+                                </div>
+
+                              </div>
+                      </div>
+
+                  </div>                      
+
+              
+              {% endfor %}
+
+
+        </div>
+
+    </div>
+
+</div>  
+
+
+
+
+<div class="container6">
+    <h1>
+    &nbsp; Users
+    </h1>
+</div>
+
+
+<div style="position: absolute; top: 650px;left: 1200px; "> 
+    <div class="btn-group dropend">
+      <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+        Filter By
+      </button>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="/search?search_key={{search_key}}&find=all">All</a></li>
+        <li><a class="dropdown-item" href="/search?search_key={{search_key}}&find=professional">Professionals</a></li>
+        <li><a class="dropdown-item" href="/search?search_key={{search_key}}&find=customer">Customers</a></li>
+        <li><a class="dropdown-item" href="/search?search_key={{search_key}}&find=pending">Pending professionals</a></li>
+        <li><a class="dropdown-item" href="/search?search_key={{search_key}}&find=blacklist">Blacklisted_users</a></li>
+      </ul>
+    </div>
+  </div> 
+
+
+<!-- this is the  pending professionals  -->
+
+<div class="container5">
+
+    <div class="container3">
+
+
+        <div class="d-flex flex-nowrap overflow-auto">
+
+          
+            {% for u in user %}
+          
+                  <div class="card me-3" style="width: 21.7rem; height: 20rem">
+
+                      <div class="card-body">
+
+                            <h4 class="card-title"><a href="/user_page/{{u.user_id}}"> {{u.name_user}}<a/></h4>
+                        
+                            <h5 class="card-subtitle mb-2 text-muted"><a href="../static/files/{{u.user_id}}.pdf" class="card-link">Identity file of {{u.user_id}}</a></h5> <br> <br>                    
+                            <h6 class="card-text">UserName: &nbsp;&nbsp;{{u.name_user}}
+                                  <br>
+                                  <h6>Address: {{u.address}}</h6>
+                                  <h6>Pincode: {{u.pin_code}}</h6>
+                                  <h6>service: <a href="/service_page/{{u.service_id}}">{{u.service_id}}</a></h6>
+                                  <h6>Ratings: {{u.professional_rating}}</h6>
+                            </h6>
+                    
+                      
+                      </div>
+                  
+                  </div>           
+          
+            {% endfor %}
+        
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="container8">
+
+    <h1>
+        &nbsp;REQUESTS
+    </h1>
+
+</div>
+    
+<div style="position: absolute; top: 1150px;left: 1200px; "> 
+    <div class="btn-group dropend">
+      <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+        Filter By
+      </button>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="/search?search_key={{search_key}}&filtered=all">All</a></li>
+        <li><a class="dropdown-item" href="/search?search_key={{search_key}}&filtered=pending">Pending</a></li>
+        <li><a class="dropdown-item" href="/search?search_key={{search_key}}&filtered=active">Active</a></li>
+        <li><a class="dropdown-item" href="/search?search_key={{search_key}}&filtered=closed">Completed</a></li>
+      </ul>
+    </div>
+  </div>   
+    
+<div class="container7">
+    
+    
+    <div class="container3">
+    
+        <div class="d-flex flex-nowrap overflow-auto">
+
+            {% for r in requests %}
+               
+                <div class="card me-3" style="width: 21.7rem;height: 21.5rem;">
+    
+                    <a class="btn btn-light" data-bs-toggle="collapse" href="#multiCollapse{{r.request_id}}" role="button" aria-expanded="true" aria-controls="multiCollapse{{r.request_id}}"> <img src="/static/service_images/{{r.service_id}}.jpg" class="card-img-top" alt="{{r.service_name}} service" style="border: none ; outline: none; width: 100%; height: 200px; object-fit: cover;"></a>
+                        
+                        <div class="collapse multi-collapse" id="multiCollapse{{r.request_id}}">
+
+                            <div class="card card-body">
+                                <b>Name: {{r.name_user}}</b>
+                                <h6>Professional_id {{r.professional_id}}</h6>
+                                <h6>Date of request: {{r.date_of_request}} day</h6>
+                                <h6>Date of completion: {{r.date_of_completion}}</h6>
+                                <h6>Address: {{r.address}}</h6>
+                                <h6>Pincode: {{r.pin_code}}</h6>
+                                <h6>Remarks: {{r.remarks}}</h6>
+                                <h6>Ratings:{{r.ratings}}</h6>
+                            </div>
+
+                        </div>
+    
+    
+                    <div class="card-body">
+
+                        <h5 class="card-title">{{r.service_name}} </h5>
+                       
+    
+                    </div>       
+                </div>
+                
+           
+            {% endfor %}
+    
+
+          
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+{% endblock %}

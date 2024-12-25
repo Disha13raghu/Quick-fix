@@ -1,0 +1,157 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+     /* Allows for absolute positioning of child elements */
+    min-width: 1517px;
+    height: 800px;
+    background-image: url('/static/images/bg2.jpg');
+
+    background-size: cover;
+     background-repeat: no-repeat;
+      mask-image: linear-gradient(to right, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 1));
+    -webkit-mask-image: linear-gradient(to right, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 1));
+}
+
+
+
+.left_top_name {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 2.6em; 
+    color: aliceblue; 
+
+    z-index: 2; 
+    font-family: 'Lobster', cursive;
+   
+ }
+
+ .head_box {
+    position: absolute;
+   
+    width: 1500px;
+    height: 100px;
+
+
+}
+
+.right_top_navigation{
+    position: absolute;
+    left:1000px;
+    font-size: 1.2em ;
+    color: black;
+    font-family: "Londrina Sketch", sans-serif; 
+    top: 20px;
+
+}
+li{
+    background-color: lightskyblue;
+}
+
+.panel {
+
+    position:absolute; 
+    padding: 30px;
+    left: 130px;
+    width: 550px;
+    height: 720px;
+   
+   
+
+}
+
+
+
+.sub_head_topleft {
+    font-size: 2.1em; 
+    margin-bottom: 10px; 
+    color: black;
+    font-family: 'Georgia', serif;
+}
+
+.stakethrough_heading_left {
+	position: absolute;
+    font-weight: bold; 
+    font-size: 3.8em;
+  
+    color: black;
+}
+
+.changing_word {
+	
+	left:20;
+    margin-top: 20px; 
+    overflow: hidden;
+    font-size: 3.8em; 
+    height: 1em;
+    font-weight: bold;
+     color: black;
+}
+.changing_word span {
+     position: absolute;
+	 width: 100%;
+     opacity: 0;
+     animation: fade 27s infinite;
+     
+}
+ @keyframes fade {
+           0%, 10% { opacity: 1;   }
+            12%, 85% { opacity: 0;}
+            
+        }
+
+       .changing_word span:nth-child(1) { animation-delay: 0s; }
+		.changing_word span:nth-child(2) { animation-delay: 3s; }
+		.changing_word span:nth-child(3) { animation-delay: 6s;  }
+		.changing_word span:nth-child(4) { animation-delay: 9s; }
+		.changing_word span:nth-child(5) { animation-delay: 12s; }
+		.changing_word span:nth-child(6) { animation-delay: 15s; }
+		.changing_word span:nth-child(7) { animation-delay: 18s; }
+		.changing_word span:nth-child(8) { animation-delay: 21s; }
+		.changing_word span:nth-child(9) { animation-delay: 24s; }
+
+.para1{
+	color: black;
+	font-weight: bold;
+}
+
+.para2{
+	color: black;
+	font-weight: bold;
+}
+
+.box {
+    margin-top: 20px; 
+    text-align: center; 
+    background-color:white ;
+    width: 450px;
+    height: 80px;
+}
+
+
+button {
+    top: 540px;
+    position: absolute;
+    left: 147px;
+    height: 40px;
+    width:220px;
+    background-color: deepskyblue;
+    border: none;
+    outline: none;
+
+}
+
+button:hover {
+    background-color:deepskyblue; 
+
+}
+
+.login{
+    color: black;
+    font-weight: bold;
+
+
+}

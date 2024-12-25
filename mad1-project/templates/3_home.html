@@ -1,0 +1,351 @@
+{% extends "./layouts/mainframe.html" %}
+
+{% block title%}
+
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='style/signup.css') }}">
+{% endblock %}
+
+{% block body %}
+<div>
+{% include "./basic_components/navigation.html" %}
+  
+
+
+<!-- this is the service title-->
+
+<div class="container4">
+    <h1>
+    &nbsp; BOOK SERVICES
+    </h1>
+</div>
+
+
+<!--this is all service details and added name-->
+
+<div class="container2">
+
+     <!--this is the container to hold cards-->
+
+      <div class="container3">
+
+          <div class="d-flex flex-nowrap overflow-auto">
+
+
+                {% for s in services %}
+
+
+                    <div class="card me-3" style="width: 21.7rem;">
+
+                            <a class="btn btn-light" data-bs-toggle="collapse" href="#multiCollapse{{s.service_id}}s" role="button" aria-expanded="true" aria-controls="multiCollapse{{s.service_is}}"> <img src="/static/service_images/{{s.service_id}}.jpg" class="card-img-top" alt="{{s.name}} service" style="border: none ; outline: none; width: 100%; height: 200px; object-fit: cover;"></a>
+                        
+                            <div class="collapse multi-collapse" id="multiCollapse{{s.service_id}}s">
+
+                                    <div class="card card-body">
+                                        <b>Price: {{s.price}}</b>
+                                        <h6>Time Required: {{s.time_required}} </h6>
+                                        <h6> {{s.service_description}}</h6>
+                                        <h6> Ratings:{{s.service_rating}}</h6>
+
+                                    </div>
+
+                            </div>
+
+
+                            <div class="card-body">
+                                    <h5 class="card-title">{{s.service_name}} </h5>
+                                
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrops{{s.service_id}}">
+                                    BOOK
+                                    </button>
+
+                                <div class="modal fade" id="staticBackdrops{{s.service_id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabels{{s.service_id}}" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="staticBackdropLabels{{s.service_id}}">BOOK SERVICE</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> </button>
+                                            </div>
+
+
+                                            <div class="modal-body">
+
+                                                    <form class="row g-3" method="POST" action="/book_service/{{s.service_id}}" >
+                                                            <div class="col-md-6">
+                                                                <label for="name" class="form-label">Address</label>
+                                                                <input type="text" name="address"class="form-control" id="Address" value={{curr_user.address}} required>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label for="pin_code" class="form-label">Pincode</label>
+                                                                <input type="number" name="pin_code"class="form-control" id="in_code" value={{curr_user.pin_code}} required>
+                                                            </div>
+                                                                                
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                <button type="submit" class="btn btn-primary" >BOOK</button>
+                                                            </div>
+                                                    </form>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                    </div>                      
+
+                
+                {% endfor %}
+
+
+          </div>
+
+      </div>
+
+</div>  
+
+
+
+<!--_____________________________________________________________________________________________________________________________________________________________________________________________________-->
+
+<!--  this is now Actice_services requests -->
+
+<div class="container6">
+
+    <h1>
+        &nbsp; ACTIVE REQUESTS
+    </h1>
+
+</div>         
+
+
+<div class="container5">
+    
+    
+    <div class="container3">
+    
+        <div class="d-flex flex-nowrap overflow-auto">
+
+            {% for r in active_requests %}
+               
+                <div class="card me-3" style="width: 21.7rem;height: 21.5rem;">
+    
+                    <a class="btn btn-light" data-bs-toggle="collapse" href="#multiCollapser{{r.request_id}}" role="button" aria-expanded="true" aria-controls="multiCollapser{{r.request_id}}"> <img src="/static/service_images/{{r.service_id}}.jpg" class="card-img-top" alt="{{r.service_name}} service" style="border: none ; outline: none; width: 100%; height: 200px; object-fit: cover;"></a>
+                        
+                        <div class="collapse multi-collapse" id="multiCollapser{{r.request_id}}">
+
+                            <div class="card card-body">
+                                <b>Name: {{r.name_user}}</b>
+                                <h6>Professional_appointed: {{r.professional_id}} </h6>
+                                <h6> Address: {{r.address}}</h6>
+                                <h6> Pin_code: {{r.pin_code}}</h6>
+                                <h6> Date of request: {{r.date_of_request}}</h6>
+
+                            </div>
+
+                        </div>
+    
+    
+                    <div class="card-body">
+
+                        <h5 class="card-title">{{r.service_name}}:  {{r.service_status}}</h5>  
+
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdropr{{r.request_id}}">
+                            COMPLETED?
+                        </button>
+
+                            <div class="modal fade" id="staticBackdropr{{r.request_id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabelr{{r.request_id}}" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="staticBackdropLabelr{{r.request_id}}">SERVICE REMARKS</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+
+
+                                            <div class="modal-body">
+
+                                                    <form class="row g-3" method="POST" action="/completed_service/{{r.request_id}}" >
+                                                            <div class="col-md-6">
+                                                                <label for="name" class="form-label">Remarks</label>
+                                                                <input type="text" name="service_remarks"class="form-control" id="Address"  required>
+                                                            </div>
+
+        
+                                                            <div class="col-md-6">
+                                                                <label> RATE SERVICE
+                                                                </label>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name= "rating" id="flexRadioDefault0" value=0 required>
+                                                                    <label class="form-check-label" for="flexRadioDefault0">
+                                                                    0
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="rating" id="flexRadioDefault1" value=1 required>
+                                                                    <label class="form-check-label" for="flexRadioDefault1">
+                                                                    1
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="rating" id="flexRadioDefault2" value=2 required>
+                                                                    <label class="form-check-label" for="flexRadioDefault2">
+                                                                    2
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="rating" id="flexRadioDefault3" value=3 required>
+                                                                    <label class="form-check-label" for="flexRadioDefault3">
+                                                                    3
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="rating" id="flexRadioDefault4" value=4 required>
+                                                                    <label class="form-check-label" for="flexRadioDefault4">
+                                                                    4
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="rating" id="flexRadioDefault5" value=5 required>
+                                                                    <label class="form-check-label" for="flexRadioDefault5">
+                                                                    5
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                                                
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                <button type="submit" class="btn btn-primary" >COMPLETED </button>
+                                                            </div>
+                                                    </form>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                            </div>
+
+                    </div>    
+
+                </div>
+                
+           
+            {% endfor %}
+    
+
+
+            {% for r in pending_requests %}
+               
+                <div class="card me-3" style="width: 21.7rem;height: 21.5rem;">
+    
+                    <a class="btn btn-light" data-bs-toggle="collapse" href="#multiCollapse{{r.request_id}}" role="button" aria-expanded="true" aria-controls="multiCollapse{{r.request_id}}"> <img src="/static/service_images/{{r.service_id}}.jpg" class="card-img-top" alt="{{r.service_name}} service" style="border: none ; outline: none; width: 100%; height: 200px; object-fit: cover;"></a>
+                        
+                        <div class="collapse multi-collapse" id="multiCollapse{{r.request_id}}">
+
+                            <div class="card card-body">
+                                <b>Name: {{r.name_user}}</b>
+                                <h6>Professional_appointed: {{r.professional_name}} </h6>
+                                <h6> Address: {{r.address}}</h6>
+                                <h6> Pin_code: {{r.pin_code}}</h6>
+                                <h6> Date of request: {{r.date_of_request}}</h6>
+
+                            </div>
+
+                        </div>
+    
+    
+                    <div class="card-body">
+
+                        <h5 class="card-title">{{r.service_name}}: {{r.service_status}} </h5>  
+
+                    </div>    
+
+                </div>
+                
+           
+            {% endfor %}
+    
+
+          
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+
+<!--_____________________________________________________________________________________________________________________________________________________________________________________________________-->
+
+<!--  this is now completed requests -->
+
+
+<div class="container8">
+
+    <h1>
+        &nbsp; COMPLETED SERVICES
+    </h1>
+
+</div>
+    
+    
+    
+<div class="container7">
+    
+    
+    <div class="container3">
+    
+        <div class="d-flex flex-nowrap overflow-auto">
+
+            {% for r in completed_requests %}
+               
+                <div class="card me-3" style="width: 21.7rem;height: 21.5rem;">
+    
+                    <a class="btn btn-light" data-bs-toggle="collapse" href="#multiCollapse{{r.request_id}}" role="button" aria-expanded="true" aria-controls="multiCollapse{{r.request_id}}"> <img src="/static/service_images/{{r.service_id}}.jpg" class="card-img-top" alt="{{r.service_name}} service" style="border: none ; outline: none; width: 100%; height: 200px; object-fit: cover;"></a>
+                        
+                        <div class="collapse multi-collapse" id="multiCollapse{{r.request_id}}">
+
+                            <div class="card card-body">
+                                <b>Name: {{r.name_user}}</b>
+                                <h6>User_name {{r.user_name}}</h6>
+                                <h6>Date of request: {{r.date_of_request}} day
+                                <h6>Date of completion: {{r.date_of_completion}}</h6>
+                                <h6>Address: {{r.address}}</h6>
+                                <h6>Remarks: {{r.remarks}}</h6>
+                                <h6>Ratings:{{r.ratings}}</h6>
+                            </div>
+
+                        </div>
+    
+    
+                    <div class="card-body">
+
+                        <h5 class="card-title">{{r.service_name}} </h5>
+                       
+    
+                    </div>       
+                </div>
+                
+           
+            {% endfor %}
+    
+
+          
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+{%endblock%}

@@ -1,0 +1,217 @@
+{% extends "./layouts/mainframe.html" %}
+
+{% block title%}
+      Home Page
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='style/signup.css') }}">
+{% endblock %}
+
+{% block body %}
+
+<div>
+    {% include "./basic_components/navigation.html" %}
+</div>
+
+
+<!-- This is  requests of/from user -->
+
+<div class="container4">
+
+    <h1>
+        &nbsp; SERVICE REQUESTS
+    </h1>
+
+</div>
+    
+    
+    
+<div class="container2">
+    
+    
+    <div class="container3">
+    
+        <div class="d-flex flex-nowrap overflow-auto">
+
+
+                {% for r in pending_requests %}
+                
+                    <div class="card me-3" style="width: 21.7rem; height: 21.5rem;" >
+        
+                        <a class="btn btn-light" data-bs-toggle="collapse" href="#multiCollapse{{r.request_id}}" role="button" aria-expanded="true" aria-controls="multiCollapse{{r.request_id}}"> <img src="/static/service_images/{{r.service_id}}.jpg" class="card-img-top" alt="{{r.service_name}} service" style="border: none ; outline: none; width: 100%; height: 200px; object-fit: cover;"></a>
+                            
+                            <div class="collapse multi-collapse" id="multiCollapse{{r.request_id}}">
+
+                                <div class="card card-body">
+                                        <b>Name: {{r.name_user}}</b>
+                                        <h6>User_name: {{r.user_name}} </h6>
+                                        <h6> Address: {{r.address}}</h6>
+                                        <h6> Pin_code: {{r.pin_code}}</h6>
+                                        <h6> Date: {{r.date_of_request}}</h6>
+                                </div>
+
+                            </div>
+        
+        
+                        <div class="card-body">
+
+
+                            <h5 class="card-title">{{r.service_name}} </h5> 
+                          
+                            <a class="btn btn-primary" href="/accept_request/{{r.request_id}}/{{curr_user.user_id}}" role="button">Accept</a>
+                            <a class="btn btn-primary" href="/reject_request/{{r.request_id}}/{{curr_user.user_id}}" role="button">Reject</a>
+                       
+                       
+                        </div>     
+                    
+                    </div>    
+            
+                    
+            
+                {% endfor %}
+        
+
+        </div>
+
+
+    </div>
+
+
+</div>    
+ 
+
+
+
+
+
+
+    
+
+<!--_____________________________________________________________________________________________________________________________________________________________________________________________________-->
+
+<!--  this is now Actice_services requests -->
+
+<div class="container6">
+
+    <h1>
+        &nbsp; ACTIVE SERVICES
+    </h1>
+
+</div>         
+
+
+<div class="container5">
+    
+    
+    <div class="container3">
+    
+        <div class="d-flex flex-nowrap overflow-auto">
+
+            {% for r in active_requests %}
+               
+                <div class="card me-3" style="width: 21.7rem;height: 21.5rem;">
+    
+                    <a class="btn btn-light" data-bs-toggle="collapse" href="#multiCollapse{{r.request_id}}" role="button" aria-expanded="true" aria-controls="multiCollapse{{r.request_id}}"> <img src="/static/service_images/{{r.service_id}}.jpg" class="card-img-top" alt="{{r.service_name}} service" style="border: none ; outline: none; width: 100%; height: 200px; object-fit: cover;"></a>
+                        
+                        <div class="collapse multi-collapse" id="multiCollapse{{r.request_id}}">
+
+                            <div class="card card-body">
+                                <b>Name: {{r.name_user}}</b>
+                                <h6>User_name: {{r.user_name}} </h6>
+                                <h6> Address: {{r.address}}</h6>
+                                <h6> Pin_code: {{r.pin_code}}</h6>
+                                <h6> Date: {{r.date_of_request}}</h6>
+
+                            </div>
+
+                        </div>
+    
+    
+                    <div class="card-body">
+
+                        <h5 class="card-title">{{r.service_name}} </h5>  
+
+                    </div>    
+
+                </div>
+                
+           
+            {% endfor %}
+    
+
+          
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<!--_____________________________________________________________________________________________________________________________________________________________________________________________________-->
+
+<!--  this is now completed requests -->
+
+
+<div class="container8">
+
+    <h1>
+        &nbsp; COMPLETED SERVICES
+    </h1>
+
+</div>
+    
+    
+    
+<div class="container7">
+    
+    
+    <div class="container3">
+    
+        <div class="d-flex flex-nowrap overflow-auto">
+
+            {% for r in completed_requests %}
+               
+                <div class="card me-3" style="width: 21.7rem;height: 21.5rem;">
+    
+                    <a class="btn btn-light" data-bs-toggle="collapse" href="#multiCollapse{{r.request_id}}" role="button" aria-expanded="true" aria-controls="multiCollapse{{r.request_id}}"> <img src="/static/service_images/{{r.service_id}}.jpg" class="card-img-top" alt="{{r.service_name}} service" style="border: none ; outline: none; width: 100%; height: 200px; object-fit: cover;"></a>
+                        
+                        <div class="collapse multi-collapse" id="multiCollapse{{r.request_id}}">
+
+                            <div class="card card-body">
+                                <b>Name: {{r.name_user}}</b>
+                                <h6>User_name {{r.user_name}}</h6>
+                                <h6>Date of request: {{r.date_of_request}} day
+                                <h6>Date of completion: {{r.date_of_completion}}</h6>
+                                <h6>Address: {{r.address}}</h6>
+                                <h6>Remarks: {{r.remarks}}</h6>
+                                <h6>Ratings:{{r.ratings}}</h6>
+                            </div>
+
+                        </div>
+    
+    
+                    <div class="card-body">
+
+                        <h5 class="card-title">{{r.service_name}} </h5>
+                       
+    
+                    </div>       
+                </div>
+                
+           
+            {% endfor %}
+    
+
+          
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+{% endblock %}

@@ -1,0 +1,91 @@
+{% extends "./layouts/mainframe.html" %}
+
+{% block title%}
+     Homepage
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='style/homepage.css') }}">
+
+{% endblock %}
+
+{% block body %}
+<div id= "1" class= "container">
+    <div class="head_box">
+    
+        <div class="left_top_name">
+            ◕ QUICK  FIX
+        </div>
+        <div class="right_top_navigation">
+         <nav>	
+             <ul class="nav nav-pills">
+           <li class="nav-item">
+             <a class="nav-link active" aria-current="page" href="#1" style="background-color: deepskyblue;">Home</h3></a>
+           </li>
+           &nbsp; &nbsp;
+           <li class="nav-item">
+             <a class="nav-link active"  href="/signup_professional" style="background-color: deepskyblue;">Sign Up as Professional</a>
+           </li>
+           &nbsp; &nbsp;
+           <li class="nav-item">
+             <a class="nav-link active"  href="#2" style="background-color: deepskyblue;">About</a>
+           </li>
+           
+         </ul>
+            
+      </nav>
+        </div>	
+</div>
+    <br>
+    <br><br>
+    <div class= "panel">
+        
+        <div class= "sub_head_topleft">
+            Your to-do list:
+        </div>
+        
+        <div class="stakethrough_heading_left">
+
+            <del>Clean up.</del>
+         </div>
+         <br>
+         <br>
+         <br>
+
+        
+       
+        <div class="changing_word">
+            <span> Get Coffee.</span>
+            <span> Go Shopping.</span>
+            <span> Read a Book.</span>
+            <span> Pet a puppy.</span>
+            <span> Get Tacos.</span>
+            <span> No. Pizza.</span>
+            <span> Wait. Ice cream.</span>
+            <span> Yes. Ice cream.</span>
+            <span> Or...</span>
+
+     </div>
+
+      
+        <br>
+        <br>
+        <br>
+
+        <p   class= "para1" id="2"> Welcome to QuickFix—your go-to solution for all household services! From plumbing and electrical repairs to cleaning and more, our verified professionals are here to make your life easier. </p>
+        <br>
+      
+        <p class="para2"> QuickFix ensures quick, reliable, and hassle-free service with just a tap. Book today and let us take care of your home while you sit back and relax!</p>
+        <div class="box">
+          <a href="/login" >
+            <button class ="login">
+                 LOG IN  
+
+             </button>
+            </a>
+        </div>	
+         </div>
+
+
+    </div>
+{% endblock %}

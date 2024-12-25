@@ -1,0 +1,64 @@
+{% extends "./layouts/mainframe.html" %}
+
+{% block title%}
+      Login
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='style/signup.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class= "head_box">
+    <div class="down">
+    <h2> ◕ Quick Fix </h2>
+    </div>
+    <div class="right">
+      <a href="/signup_professional" class="btn btn-primary btn-sm"><b>Sign in as Professional<b></a> 	
+    </div>
+    
+</div>
+
+
+
+<div class="container">
+  <div class="panel">
+
+  <div class="panel_content">
+    <div class="dash">
+        </div>
+  
+  <h1 class="center">	<b>User Login</b>  </h1><br><br>
+  <form action="/login" method="POST">
+      <div class="row mb-4">
+      <label for="inputEmail3" class="col-sm-3 col-form-label">Username</label>
+      <div class="col-sm-8">
+      <input type="email" class="form-control" id="inputEmail3" name="user_name">
+      </div>
+      </div>
+      <div class="row mb-4">
+      <label for="inputPassword3" class="col-sm-3 col-form-label">Password </label>&nbsp;
+      <div class="col-sm-8">
+      <input type="password" class="form-control" id="inputPassword3" name="password">
+      </div>
+      </div>
+
+      <div class="center">
+      <button  type="submit" class="btn btn-primary">Log in</button>
+      </div>
+  </form>
+    </div> 
+
+
+  </div>
+
+</div>
+<div class="signup"> New to Quick Fix ? &nbsp; &nbsp;
+ <a href="/signup_user"><b>Sign up</b></a>
+
+</div>
+
+
+
+
+{% endblock %}

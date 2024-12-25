@@ -1,0 +1,208 @@
+{% extends "./layouts/mainframe.html" %}
+
+{% block title%}
+      Home Page
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='style/signup.css') }}">
+{% endblock %}
+
+{% block body %}
+
+<div>
+    {% include "./basic_components/navigation.html" %}
+</div>
+
+
+
+<div class="container4">
+
+    <h1>
+        &nbsp; Profile
+    </h1>
+
+</div>
+    
+    
+    
+<div class="container2profiles">
+    <div class="row">
+      <div class="col-4" >
+                        <img src="/static/images/profile.jpg" alt="Profile Image" style="width: 160px; height: 160px;">
+                        
+                          <div style="margin-left: 15px;">
+                             <h5> {{ curr_user.user_id}}. {{curr_user.name_user}}  
+                             <h5> UserName: {{curr_user.user_name}}   </h5>
+                             <h5>Address: {{curr_user.address}}   </h5>
+                             <h5>Pin_code: {{curr_user.pin_code}}     </h5>
+                             
+                          </div>   
+      </div>
+   
+    
+      <div class="col-8">
+           <div class="row">
+              <div class="col-6">
+                  <img src="/static/charts_user/rating_pie/{{curr_user.user_id}}pie.jpg" alt="Ratings pie Chart" style="width: 500px; height: 400px;">
+        
+
+
+              </div>
+              
+              <div class="col-4">
+
+                <img src="/static/charts_user/service_bargraph/{{curr_user.user_id}}bar.jpg" alt="Service Bar graph" style="width: 400px; height: 400px;"><br>
+               <b> Total Requests= {{total_request}}</b>
+
+              </div>
+            
+
+           </div>
+
+      </div>
+
+    </div>
+</div>    
+ 
+
+
+
+
+
+
+    
+
+<!--_____________________________________________________________________________________________________________________________________________________________________________________________________-->
+
+<!--  this is the professional service_requests requests 
+
+
+<div class="container6">
+    <h1>
+      &nbsp; SERVICE REQUESTS
+   </h1>
+</div>
+
+<!-- this is all request 
+
+<div class="container5">
+    
+    
+  <div class="container3">
+  
+  
+    
+      <div class="d-flex flex-nowrap overflow-auto">
+
+          {% for r in requests %}
+             
+              <div class="card me-3" style="width: 21.7rem;height: 21.5rem;">
+  
+                  <a class="btn btn-light" data-bs-toggle="collapse" href="#multiCollapse{{r.request_id}}" role="button" aria-expanded="true" aria-controls="multiCollapse{{r.request_id}}"> <img src="/static/service_images/{{r.service_id}}.jpg" class="card-img-top" alt="{{r.service_name}} service" style="border: none ; outline: none; width: 100%; height: 200px; object-fit: cover;"></a>
+                      
+                      <div class="collapse multi-collapse" id="multiCollapse{{r.request_id}}">
+
+                          <div class="card card-body">
+                              <b>Customer Name:<a href="/user_page/{{r.user_id}}"> {{r.name_user}}</a></b>
+                              <h6>User_name {{r.user_name}}</h6>
+                              <b>Professional Id: {{r.professional_id}}</b>
+                              <h6>Date of request: {{r.date_of_request}} day
+                              <h6>Date of completion: {{r.date_of_completion}}</h6>
+                              <h6>Address: {{r.address}}</h6>
+                              <h6>Remarks: {{r.remarks}}</h6>
+                              <h6>Ratings:{{r.ratings}}</h6>
+                          </div>
+
+                      </div>
+  
+  
+                  <div class="card-body">
+
+                      <h5 class="card-title">{{r.request_id}}.{{r.service_name}} -  {{r.service_status}}</h5>
+                     
+  
+                  </div>       &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+
+              </div>
+              
+         
+          {% endfor %}
+  
+
+        
+      </div>
+  
+
+  </div>
+
+</div>
+  
+
+
+<!--_____________________________________________________________________________________________________________________________________________________________________________________________________-->
+
+<!--  this is now completed requests 
+
+
+<div class="container8">
+
+    <h1>
+        &nbsp; COMPLETED SERVICES
+    </h1>
+
+</div>
+    
+    
+    
+<div class="container7">
+    
+    
+    <div class="container3">
+    
+        <div class="d-flex flex-nowrap overflow-auto">
+
+            {% for r in completed_requests %}
+               
+                <div class="card me-3" style="width: 21.7rem;height: 21.5rem;">
+    
+                    <a class="btn btn-light" data-bs-toggle="collapse" href="#multiCollapse{{r.request_id}}" role="button" aria-expanded="true" aria-controls="multiCollapse{{r.request_id}}"> <img src="/static/service_images/{{r.service_id}}.jpg" class="card-img-top" alt="{{r.service_name}} service" style="border: none ; outline: none; width: 100%; height: 200px; object-fit: cover;"></a>
+                        
+                        <div class="collapse multi-collapse" id="multiCollapse{{r.request_id}}">
+
+                            <div class="card card-body">
+                                <b>Name: {{r.name_user}}</b>
+                                <h6>User_name {{r.user_name}}</h6>
+                                <h6>Date of request: {{r.date_of_request}} day
+                                <h6>Date of completion: {{r.date_of_completion}}</h6>
+                                <h6>Address: {{r.address}}</h6>
+                                <h6>Remarks: {{r.remarks}}</h6>
+                                <h6>Ratings:{{r.ratings}}</h6>
+                            </div>
+
+                        </div>
+    
+    
+                    <div class="card-body">
+
+                        <h5 class="card-title">{{r.service_name}} </h5>
+                       
+    
+                    </div>       
+                </div>
+                
+           
+            {% endfor %}
+    
+
+          
+        </div>
+
+
+    </div>
+
+</div>   -->
+
+
+
+{% endblock %}

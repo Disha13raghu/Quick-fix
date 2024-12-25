@@ -1,0 +1,82 @@
+{% extends "./layouts/mainframe.html" %}
+
+{% block title%}
+user_signup
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='style/signup.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class= "head_box">
+    <div class="down">
+    <h2> ◕ Quick Fix </h2>
+    </div>
+    <div class="right">
+   <a href="/signup_professional" class="down"><b>Signup as user</b></a> 	
+    </div>
+    
+</div>
+
+
+<div class="outer_box",>	
+    <div class="dashed">
+    <h1 class="center"> <b > Sign Up </b> </h1>
+ </div>
+
+
+<div class="box">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+  <form class="row g-3" method="POST", action="/signup_professional" enctype="multipart/form-data">
+
+       <div class="col-md-6">
+     <label for="inputAddress" class="form-label">Full Name</label>
+     <input type="text" class="form-control" id="inputAddress" placeholder="Max Gilbert" name="name_user" required>
+   </div>
+
+   <div class="col-md-6">
+     <label for="inputEmail4" class="form-label">Username</label>
+     <input type="email" class="form-control" name="user_name" id="inputEmail4" placeholder="max@gmail.com" required>
+   </div>
+   <div class="col-md-6">
+     <label for="inputPassword4" class="form-label">Password</label>
+     <input type="password" class="form-control" name="password" id="inputPassword4" placeholder="******" pattern="^(?=.*[a-zA-Z])(?=.*\d)[A-Za-z\d]{5,15}$" 
+     title="Password must contain at least one letter and one number, and be at least 6 characters long and not more than 15 characters" required>
+     
+   </div>
+   <div class="col-12">
+     <label for="inputAddress" class="form-label">Address</label>
+     <input type="text" class="form-control" id="inputAddress" name="address" placeholder="1234 Main St" required>
+   </div>
+
+   <div class="col-md-2">
+     <label for="inputZip" class="form-label">pin code</label>
+     <input type="text" class="form-control" id="inputZip" name="pin_code" placeholder="22404" required>
+   </div>
+   <div>
+					
+    <label for="service">Select Service </label>
+    
+    <select name="service_id" id="service">
+    {% for s in service %}
+    <option value="{{s.service_id}}">{{s.service_name}}</option>
+    {% endfor %}
+    </select>
+    </div>
+   <div class="mb-3">
+    <label for="formFile" class="form-label">Identification File</label>
+    <input class="form-control" type="file" id="formFile" name="file">
+  </div>
+   
+   <div class="col-12">
+     <button type="submit" class="btn btn-primary">Sign Up</button>   &nbsp; &nbsp;&nbsp; 
+      Already have an account ?  <a href="/login"> Log In </a>
+   
+   </div>
+ </form> &nbsp; &nbsp;&nbsp; 
+ 
+                
+</div>
+</div>
+{% endblock %}

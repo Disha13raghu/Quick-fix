@@ -1,0 +1,31 @@
+<nav class="navbar fixed-top bg-body-tertiary">
+    <div class="container-fluid">
+     <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link " aria-current="page" href="/home">HOME</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link " aria-current="page" href="/search">SEARCH</a>
+    </li>
+    <li class="nav-item">
+     <a class="nav-link " aria-current="page" href="/summary">SUMMARY</a>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link " aria-current="page" href="/logout">LOG OUT</a>
+  </li>
+  </ul>
+  <ul class="nav justify-content-center">
+         <li><h1>WELCOME TO QUICKFIX </h1></li>
+  </ul>	
+  <ul class="nav justify-content-end">
+    {% if curr_user.role==1%}
+   
+      <li class="color"><h2> User Admin  &nbsp;&nbsp;</h2></li>
+    {% elif curr_user.role==2%}
+      <li class="color"><h2> Professional &nbsp;&nbsp;</h2></li>
+    {% else %}
+      <li class="color"><h2> User  {{curr_user.name_user}} &nbsp;&nbsp;</h2></li>
+    {% endif %}
+  </ul>	
+    </div>
+  </nav>
